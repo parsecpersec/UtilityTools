@@ -86,7 +86,6 @@ if len(info) != 0:
         print('\n\ncopy successful!')
     else:
         print('please make sure where the photos are!')
-    os.system('pause')
 else:
     print('no photos to copy!')
-    os.system('pause')
+os.system('pause')
