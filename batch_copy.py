@@ -36,8 +36,9 @@ def create_name(data):
 def find_file(data):
     split = []
     finished = []
+    sep = ','
     for i in range(0, len(data)):
-        split.append(data.loc[i, 'File'].split('、'))
+        split.append(data.loc[i, 'File'].split(sep))
     for i in range(0, len(split)):
         complete = []
         for j in range(0, len(split[i])):
@@ -62,7 +63,7 @@ def copy(path, data, files):
         n_exist = 0
         for j in range(0, len(files[i])):
             num = str('%04d' % files[i][j])
-            the_file = 'DSC_' + num + '.jpg'
+            the_file = 'DSC_' + num + '.JPG'
             if the_file in os.listdir(FROM_WHERE):
                 n_exist += 1
                 shutil.copy(path + the_file, TO + folder)
@@ -78,14 +79,22 @@ if len(info) != 0:
     mkdir(TO)
     create_name(info)
     print(info)
+    legal = 1
     for n in range(0, len(info)):
-        mkdir(TO + info.iloc[n, 5])
-    print('\nmkdir successful!\n')
-    if os.path.exists(FROM_WHERE):
-        copy(FROM_WHERE, info, find_file(info))
-        print('\n\ncopy successful!')
+        if '<' in info.iloc[n, 3] or '>' in info.iloc[n, 3] or '?' in info.iloc[n, 3]:
+            legal = 0
+            break
+        else:
+            mkdir(TO + info.iloc[n, 5])
+    if legal == 0:
+        print('\nany of these characters <>?/\\"*:| is not allowed!\n')
     else:
-        print('please make sure where the photos are!')
+        print('\nmkdir successful!\n')
+        if os.path.exists(FROM_WHERE):
+            copy(FROM_WHERE, info, find_file(info))
+            print('\n\ncopy successful!')
+        else:
+            print('please make sure where the photos are!')
 else:
     print('no photos to copy!')
 os.system('pause')
