@@ -9,6 +9,7 @@ def find_dir(path):
         for name in files:
             filelist.append(os.path.join(root, name))
     new = os.path.getctime(filelist[0])
+    newest_file = filelist[0]
     for img_file in filelist:
         t = os.path.getctime(img_file)
         if t > new:
