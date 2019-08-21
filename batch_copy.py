@@ -29,10 +29,10 @@ def mkdir(path):
 
 def create_name(data):
     for i in range(0, len(data)):
-        if isnull(data.iloc[i, 1]):
-            data.loc[i, 'Dir_Name'] = str(data.iloc[i, 0]) + ' ' + data.iloc[i, 2] + ' ' + data.iloc[i, 3]
+        if isnull(data.iloc[i, 2]):
+            data.loc[i, 'Dir_Name'] = str(data.iloc[i, 1]) + ' ' + data.iloc[i, 0] + ' ' + data.iloc[i, 3]
         else:
-            data.loc[i, 'Dir_Name'] = str(data.iloc[i, 0]) + r'(old)' + data.iloc[i, 2] + ' ' + data.iloc[i, 3]
+            data.loc[i, 'Dir_Name'] = str(data.iloc[i, 1]) + r'(old)' + data.iloc[i, 0] + ' ' + data.iloc[i, 3]
 
 def find_file(data):
     split = []
