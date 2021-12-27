@@ -29,6 +29,6 @@ for index, item in enumerate(items):
                 file.flush()
             file.close()
         print(name + ' - done')
-        time.sleep(1.5)
+        time.sleep(2)
 
 
